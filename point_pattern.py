@@ -27,7 +27,8 @@ def manhattan_distance(a, b):
     distance : float
                The Manhattan distance between the two points
     """
-    distance =  None # Add the algorithm to compute manhattan distance here
+
+    distance =  abs(a[0] - b[0]) + abs(a[1] - b[1])
     return distance
 
 
@@ -49,7 +50,8 @@ def euclidean_distance(a, b):
     distance : float
                The Euclidean distance between the two points
     """
-    distance = None  # Add the euclidean distance algorithm here
+    # sqrt((x2 - x1)**2 + (y2 - y1)**2)
+    distance = math.pow((a[0] - b[0])**2 + (a[1] - b[1])**2, 0.5)
     return distance
 
 
@@ -71,7 +73,7 @@ def shift_point(point, x_shift, y_shift):
     Returns
     -------
     new_x : int or float
-            shited x coordinate
+            shifted x coordinate
 
     new_y : int or float
             shifted y coordinate
@@ -87,8 +89,8 @@ def shift_point(point, x_shift, y_shift):
     x = getx(point)
     y = gety(point)
 
-    x_new = None  # Add the logic to shift x here
-    y_new = None  # Add the logic to shift y here
+    x_new = x + x_shift  # Add the logic to shift x here
+    y_new = y + y_shift  # Add the logic to shift y here
 
     return x_new, y_new
 
@@ -109,7 +111,7 @@ def check_coincident(a, b):
     equal : bool
             Whether the points are equal
     """
-    return None  # Add the logic to check if coincident here
+    return (a[0] == b[0]) & (a[1] == b[1])  # Add the logic to check if coincident here
 
 
 def check_in(point, point_list):
@@ -124,7 +126,11 @@ def check_in(point, point_list):
     point_list : list
                  in the form [point, point_1, point_2, ..., point_n]
     """
-    return None # Add the logic to check if a point is in the point list here
+    # Filter the list, capture any points that are identical to the target.
+    results = list(filter(lambda point_n: point_n[0] == point[0] and point_n[1] == point[1], point_list))
+    # not results is True if results is empty, but we want to check if the point is in the list.
+    # not not results is True if results contains any element. The only element it can contain is the point.
+    return not not results
 
 
 def getx(point):
